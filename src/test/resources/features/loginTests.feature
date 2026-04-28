@@ -1,9 +1,10 @@
 @login
+
 Feature: Login Page Functionality
 
   Scenario: Verify login with valid credentials
     Given user is on the login page
-    When user enters username and password
+    When the user enters username and password
     And clicks on the login button
     Then user should be redirected to the inventory page
 
@@ -29,3 +30,4 @@ Feature: Login Page Functionality
     When user enters locked user credentials
     And clicks on the login button
     Then error message "Epic sadface: Sorry, this user has been locked out." should be displayed
+

@@ -1,17 +1,22 @@
 package stepDefinitions;
 
+import configReader.ConfigReader;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pages.InventoryPage;
+import pages.LoginPage;
 
 public class InventoryPageSteps {
-
     InventoryPage inventoryPage;
+    public InventoryPageSteps(){
+       inventoryPage = new InventoryPage();
+    }
 
     @Then("user should be redirected to the inventory page")
     public void userShouldRedirectedToInventoryPage() {
-        inventoryPage = new InventoryPage();
 
         Assert.assertTrue(inventoryPage.validateUserIsOnProductsPage(),
                 "User in not on the product inventory page");
@@ -95,5 +100,36 @@ public class InventoryPageSteps {
         Assert.assertTrue(inventoryPage.validateCartPage(),
                 "User not redirected to cart page");
     }
+//sindhu
+    @When("user clicks on the menu button on the left")
+    public void userClicksOnTheMenuButtonOnTheLeft(){
+        inventoryPage.clickMenu();
 
+    }
+
+    @Then("user clicks on the logout button and successfully loggedout")
+    public void userClicksOnTheLogoutButtonAndSuccessfullyLoggedout() {
+
+        inventoryPage.clickLogout();
+    }
+
+    @When("user enter firstname , lastname and postalcode")
+    public void userEnterFirstnameLastnameAndPostalcode() {
+        String firstname =  ConfigReader.getProperty("firstName");
+        String lastname =  ConfigReader.getProperty("lastName");
+        String postalcode = ConfigReader.getProperty("postalcode");
+
+        inventoryPage.enterDetailsAtCheckout(firstname,lastname,postalcode);
+    }
+
+    @Then("user should redirected to the checkout page")
+    public void userShouldRedirectedToTheCheckoutPage() {
+        inventoryPage.clickContinue();
+    }
+
+    @When("user clicks on checkout")
+    public void userClicksOnCheckout() {
+        inventoryPage.clickCheckout();
+
+    }
 }
