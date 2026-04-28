@@ -18,15 +18,15 @@ public class LoginPageSteps {
         boolean flag = loginPage.validateUserOnLoginPage();
         Assert.assertTrue(flag);
     }
-
-    @When("user enters username and password")
+    @When("the user enters username and password")
     public void userEntersUsernameAndPassword(){
-       String username =  ConfigReader.getProperty("validUserName");
-       String password =  ConfigReader.getProperty("validPassword");
+        String username =  ConfigReader.getProperty("validUserName");
+        String password =  ConfigReader.getProperty("validPassword");
 
-       loginPage.enterLoginDetails(username,password);
+        loginPage.enterLoginDetails(username,password);
     }
 
+    
     @When("user enters invalid username and password")
     public void userEntersInvalidUsernameAndPassword(){
         String username =  ConfigReader.getProperty("invalidUserName");
@@ -61,5 +61,7 @@ public class LoginPageSteps {
         String errorText = loginPage.validateErrorOnLoginPage();
         Assert.assertEquals(expectedMessage, errorText);
     }
+
+
 
 }

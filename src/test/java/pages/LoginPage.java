@@ -31,6 +31,7 @@ public class LoginPage extends BasePage {
     enterText(usernameInput, username);
     enterText(passwordInput, password);
     }
+    
 
     public void clickLoginButton(){
         click(loginButton);

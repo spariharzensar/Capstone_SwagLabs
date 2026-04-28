@@ -3,7 +3,7 @@ Feature: Inventory Page Functionality
 
   Background:
     Given user is on the login page
-    When user enters username and password
+    When the user enters username and password
     And clicks on the login button
 
   Scenario: TC-01 Verify user lands on inventory page after login
@@ -53,3 +53,18 @@ Feature: Inventory Page Functionality
     Then user should be redirected to the inventory page
     When user clicks on the cart icon
     Then user should be redirected to the cart page
+
+#sindhu
+    Scenario: TC-11 Verify user can checkout by entering correct information
+      When user clicks on Add to Cart button for "Sauce Labs Bike Light" product
+      When user clicks on the cart icon
+      Then  user should be redirected to the cart page
+      When user clicks on checkout
+      And user enter firstname , lastname and postalcode
+      Then user should redirected to the checkout page
+
+
+  Scenario: TC-12 Verify whether the user is logged out properly
+    Then user should be redirected to the inventory page
+    When user clicks on the menu button on the left
+    Then user clicks on the logout button and successfully loggedout
