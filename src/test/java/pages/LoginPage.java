@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
 
@@ -23,6 +24,12 @@ public class LoginPage extends BasePage {
     @FindBy(className = "login_logo")
     private WebElement loginLogo;
 
+    @FindBy(id = "react-burger-menu-btn")
+    WebElement buttonMenu;
+
+    @FindBy(xpath="//a[text()='Logout']")
+    WebElement logout;
+
     public boolean validateUserOnLoginPage(){
         return currentUrlContains("saucedemo");
     }
@@ -31,7 +38,6 @@ public class LoginPage extends BasePage {
     enterText(usernameInput, username);
     enterText(passwordInput, password);
     }
-    
 
     public void clickLoginButton(){
         click(loginButton);
@@ -42,7 +48,14 @@ public class LoginPage extends BasePage {
         return getText(errorMessage);
     }
 
+    //sindhu
+    public void clickMenu(){
+        wait.until(ExpectedConditions.elementToBeClickable(buttonMenu)).click();
+    }
 
+    public void clickLogout() {
+        wait.until(ExpectedConditions.elementToBeClickable(logout)).click();
 
+    }
 
 }
