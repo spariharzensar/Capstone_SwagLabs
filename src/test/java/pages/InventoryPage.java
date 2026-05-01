@@ -13,12 +13,6 @@ import java.util.List;
 
 public class InventoryPage extends BasePage {
 
-    @FindBy(id = "react-burger-menu-btn")
-    WebElement buttonMenu;
-
-    @FindBy(xpath="//a[text()='Logout']")
-    WebElement logout;
-
     @FindBy(className = "shopping_cart_link")
     WebElement cartIcon;
 
@@ -31,25 +25,8 @@ public class InventoryPage extends BasePage {
     @FindBy(className = "product_sort_container")
     WebElement sortDropdown;
 
-    //sindhu
-
-    @FindBy(id="checkout")
-    WebElement Checkout;
-
-    @FindBy(id="first-name")
-    WebElement firstnameInput;
-
-    @FindBy(id="last-name")
-    WebElement lastnameInput;
-
-    @FindBy(id="postal-code")
-    WebElement postalcodeInput;
-
-    @FindBy(id="continue")
-    WebElement Continue;
-
-    //
-
+    By cartBadgeAfterRemove = By.className("shopping_cart_badge");
+    By removeAll = By.xpath("//button[contains(@name,'remove')]");
 
     @FindBy(className = "inventory_item")
     List<WebElement> products;
@@ -91,7 +68,7 @@ public class InventoryPage extends BasePage {
     }
 
     public boolean validateProductRemoved() {
-        return isElementDisappeared(cartBadge);
+        return isElementDisappeared(cartBadgeAfterRemove);
     }
 
     public boolean validateProductDetailPage() {
@@ -117,28 +94,6 @@ public class InventoryPage extends BasePage {
     public void clickCart() {
         cartIcon.click();
     }
-//sindhu
-    public void clickMenu(){
-         wait.until(ExpectedConditions.elementToBeClickable(buttonMenu)).click();
-        }
-
-        public void clickLogout() {
-            wait.until(ExpectedConditions.elementToBeClickable(logout)).click();
-
-    }
-    public void clickCheckout() {
-        wait.until(ExpectedConditions.elementToBeClickable(Checkout)).click();
-
-    }
-    public void enterDetailsAtCheckout(String firstname, String lastname, String postalcode){
-        enterText(firstnameInput, firstname);
-        enterText(lastnameInput, lastname);
-        enterText(postalcodeInput,postalcode);
-    }
-    public void  clickContinue(){
-        wait.until(ExpectedConditions.elementToBeClickable(Continue)).click();
-    }
-//sindhu
 
     public void sortBy(String option) {
         selectByVisibleText(sortDropdown, option);
@@ -168,4 +123,10 @@ public class InventoryPage extends BasePage {
 
         return actual.equals(sorted);
     }
-}
+
+    public void removeAllProductsFromTheCartIfAny(){
+        while (!driver.findElements(removeAll).isEmpty()){
+                driver.findElements(removeAll).getFirst().click();
+        }
+        }
+    }

@@ -1,8 +1,7 @@
 package pages;
 
 import base.DriverSetup;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -14,6 +13,7 @@ public class BasePage {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
+    Alert alert;
 
     public BasePage() {
         this.driver = DriverSetup.getDriver();
@@ -47,11 +47,11 @@ public class BasePage {
         }
     }
 
-    public boolean isElementDisappeared(WebElement element) {
+    public boolean isElementDisappeared(By element) {
         try {
-            wait.until(ExpectedConditions.invisibilityOf(element));
-            return true;
-        } catch (Exception e) {
+            return wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
+
+        } catch (TimeoutException e) {
             return false;
         }
     }
@@ -64,6 +64,16 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOf(element));
         Select select = new Select(element);
         select.selectByVisibleText(text);
+    }
+
+    public void acceptAlertIfPresent(){
+        try {
+            alert = wait.until(ExpectedConditions.alertIsPresent());
+            alert.accept();
+        }
+        catch(Exception e){
+            System.out.println("No Alert Present");
+        }
     }
 
 }

@@ -20,9 +20,7 @@ public class CucumberHooks extends BaseTest {
         if (scenario.isFailed()) {
 
             byte[] screenshot = ScreenshotUtil.captureScreenshot();
-            Allure.addAttachment("Failure Screenshot", "image/png",
-                    new ByteArrayInputStream(screenshot), ".png"
-            );
+            scenario.attach(screenshot, "image/png", scenario.getName());
         }
         tearDown();
     }

@@ -2,12 +2,10 @@ package stepDefinitions;
 
 import configReader.ConfigReader;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pages.InventoryPage;
-import pages.LoginPage;
 
 public class InventoryPageSteps {
     InventoryPage inventoryPage;
@@ -37,6 +35,11 @@ public class InventoryPageSteps {
     @When("user clicks on Add to Cart button for {string} product")
     public void userAddsProductToCart(String productName) {
         inventoryPage.addProductToCart(productName);
+    }
+
+    @And("removes all the products from cart")
+    public void removesAllTheProductsFromCart(){
+        inventoryPage.removeAllProductsFromTheCartIfAny();
     }
 
     @Then("the product should be added to the cart")
@@ -99,37 +102,5 @@ public class InventoryPageSteps {
     public void userRedirectedToCartPage() {
         Assert.assertTrue(inventoryPage.validateCartPage(),
                 "User not redirected to cart page");
-    }
-//sindhu
-    @When("user clicks on the menu button on the left")
-    public void userClicksOnTheMenuButtonOnTheLeft(){
-        inventoryPage.clickMenu();
-
-    }
-
-    @Then("user clicks on the logout button and successfully loggedout")
-    public void userClicksOnTheLogoutButtonAndSuccessfullyLoggedout() {
-
-        inventoryPage.clickLogout();
-    }
-
-    @When("user enter firstname , lastname and postalcode")
-    public void userEnterFirstnameLastnameAndPostalcode() {
-        String firstname =  ConfigReader.getProperty("firstName");
-        String lastname =  ConfigReader.getProperty("lastName");
-        String postalcode = ConfigReader.getProperty("postalcode");
-
-        inventoryPage.enterDetailsAtCheckout(firstname,lastname,postalcode);
-    }
-
-    @Then("user should redirected to the checkout page")
-    public void userShouldRedirectedToTheCheckoutPage() {
-        inventoryPage.clickContinue();
-    }
-
-    @When("user clicks on checkout")
-    public void userClicksOnCheckout() {
-        inventoryPage.clickCheckout();
-
     }
 }

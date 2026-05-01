@@ -12,9 +12,12 @@ public class LoginPageSteps {
 
     LoginPage loginPage;
 
+    public LoginPageSteps(){
+        loginPage = new LoginPage();
+    }
+
     @Given("user is on the login page")
     public void userIsOnTheLoginPage(){
-        loginPage = new LoginPage();
         boolean flag = loginPage.validateUserOnLoginPage();
         Assert.assertTrue(flag);
     }
@@ -62,6 +65,17 @@ public class LoginPageSteps {
         Assert.assertEquals(expectedMessage, errorText);
     }
 
+    //sindhu
+    @When("user clicks on the menu button on the left")
+    public void userClicksOnTheMenuButtonOnTheLeft(){
+        loginPage.clickMenu();
 
+    }
+
+    @Then("user clicks on the logout button and successfully loggedout")
+    public void userClicksOnTheLogoutButtonAndSuccessfullyLoggedout() {
+
+        loginPage.clickLogout();
+    }
 
 }
