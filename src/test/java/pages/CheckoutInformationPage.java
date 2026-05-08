@@ -36,5 +36,28 @@ public class CheckoutInformationPage extends BasePage{
     public void  clickContinue(){
         wait.until(ExpectedConditions.elementToBeClickable(Continue)).click();
     }
-
+    public boolean verifyChekoutOverviewPage() {
+        return currentUrlContains("checkout-step-two.html");
+    }
+    public void enterOnlyFirstName(String firstname){
+        enterText(firstnameInput,firstname);
+    }
+    public void enterOnlyLastName(String lastname){
+        enterText(lastnameInput,lastname);
+    }
+    public void enterOnlyPostalCode(String postalcode){
+        enterText(postalcodeInput,postalcode);
+    }
+    public void enterOnlyFirstNameLastName(String firstname, String lastname){
+        enterText(firstnameInput,firstname);
+        enterText(lastnameInput,lastname);
+    }
+    public void enterOnlyFirstNamePostalCode(String firstname, String postalcode){
+        enterText(firstnameInput,firstname);
+        enterText(postalcodeInput,postalcode);
+    }
+    public void enterOnlyLastNamePostalCode(String  lastname, String postalcode){
+        enterText(lastnameInput,lastname);
+        enterText(postalcodeInput,postalcode);
+    }
 }
